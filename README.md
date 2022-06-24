@@ -26,6 +26,7 @@ yumu@yumu-pc:/whois$ tree
 ### config
 
 ```toml
+host = "127.0.0.1" # Host to listen
 port = "8080" # Port to listen
 front = "https://whois.ip.sy" # Validate valid frontend domain (http_origin)
 ip = ["x.x.x.x","x.x.x.x"] # Replace the output of the local IP with 8.8.8.8. ex: https://whois.ip.sy/#pp.ua

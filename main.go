@@ -22,6 +22,7 @@ var domaintlds []string
 
 type config struct {
 	Ips   []string `toml:"ip"`
+	Host  string   `toml:"host"`
 	Port  string   `toml:"port"`
 	Front string   `toml:"front"`
 }
@@ -116,7 +117,7 @@ func IsNum(s string) bool {
 }
 func requestHandler(w http.ResponseWriter, r *http.Request) {
 	httporigin := r.Header.Get("origin")
-	if !strings.HasPrefix(httporigin, whois_config.Front) && !strings.Contains(httporigin, "127.0.0.1:"+whois_config.Port) {
+	if !strings.HasPrefix(httporigin, whois_config.Front) && !strings.Contains(httporigin, whois_config.Host+":"+whois_config.Port) {
 		w.WriteHeader(http.StatusForbidden)
 		return
 	}
@@ -270,6 +271,6 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/api/", requestHandler)
 	mux.Handle("/", http.StripPrefix("/", fs))
-	http.ListenAndServe(":"+whois_config.Port, mux)
+	http.ListenAndServe(whois_config.Host+":"+whois_config.Port, mux)
 	select {} // block foreve
 }

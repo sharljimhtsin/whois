@@ -1,3 +1,4 @@
+host = "127.0.0.1"
 port = "8080"
-front = "https://whois.ip.sy"
-ip = ["x.x.x.x","x.x.x.x."]
+front = "https://whois.xzx.im"
+ip = []
